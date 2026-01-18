@@ -1,0 +1,2038 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+<meta charset="UTF-8"> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<title>Jawid Portfolio</title> 
+
+<!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script> 
+
+<!-- Use the Inter font --><style> 
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); 
+
+body { 
+
+font-family: 'Inter', sans-serif; 
+
+background-color: #f7f9fc; 
+
+scroll-behavior: smooth; 
+
+overflow-x: hidden; /* Prevent horizontal scroll from animations */ 
+
+} 
+
+/* Custom styles for the interactive portfolio items */ 
+
+.project-card { 
+
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+
+cursor: pointer; 
+
+border-radius: 1rem; 
+
+} 
+
+.project-card:hover { 
+
+transform: translateY(-5px) scale(1.02); 
+
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+
+} 
+
+.project-card.active { 
+
+border: 3px solid #3b82f6; /* Blue border for active item */ 
+
+} 
+
+.active-dot { 
+
+transition: background-color 0.3s; 
+
+} 
+
+/* Style the main content sections */ 
+
+.content-section { 
+
+min-height: calc(100vh - 80px); /* Ensure content fills the screen */ 
+
+padding-top: 4rem; 
+
+} 
+
+ 
+
+/* --- Home Page Specific Styles and Animations --- */ 
+
+.home-background-blob { 
+
+position: absolute; 
+
+width: 500px; 
+
+height: 500px; 
+
+background: linear-gradient(45deg, #a78bfa, #818cf8); /* Purple to Indigo */ 
+
+border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
+
+animation: blob-animate 10s ease-in-out infinite alternate; 
+
+filter: blur(80px); 
+
+opacity: 0.3; 
+
+z-index: -1; 
+
+} 
+
+ 
+
+.blob-one { 
+
+top: 10%; 
+
+left: 5%; 
+
+} 
+
+ 
+
+.blob-two { 
+
+bottom: 15%; 
+
+right: 10%; 
+
+width: 400px; 
+
+height: 400px; 
+
+background: linear-gradient(135deg, #60a5fa, #3b82f6); /* Blue */ 
+
+animation-delay: 2s; 
+
+border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; 
+
+} 
+
+ 
+
+@keyframes blob-animate { 
+
+0% { transform: scale(1) translate(0px, 0px) rotate(0deg); } 
+
+33% { transform: scale(1.1) translate(20px, -20px) rotate(10deg); border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; } 
+
+66% { transform: scale(0.9) translate(-15px, 15px) rotate(-5deg); border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; } 
+
+100% { transform: scale(1) translate(0px, 0px) rotate(0deg); } 
+
+} 
+
+ 
+
+.profile-photo { 
+
+animation: float 4s ease-in-out infinite; 
+
+} 
+
+ 
+
+@keyframes float { 
+
+0% { transform: translateY(0px); } 
+
+50% { transform: translateY(-15px); } 
+
+100% { transform: translateY(0px); } 
+
+} 
+
+ 
+
+/* Generic Fade In Up animation */ 
+
+@keyframes fadeInUp { 
+
+from { 
+
+opacity: 0; 
+
+transform: translateY(20px); 
+
+} 
+
+to { 
+
+opacity: 1; 
+
+transform: translateY(0); 
+
+} 
+
+} 
+
+.animate-fadeInUp { 
+
+animation: fadeInUp 0.6s ease-out forwards; 
+
+} 
+
+.animate-fadeInUp-1 { animation-delay: 0.2s; } 
+
+.animate-fadeInUp-2 { animation-delay: 0.4s; } 
+
+.animate-fadeInUp-3 { animation-delay: 0.6s; } 
+
+.animate-fadeInUp-4 { animation-delay: 0.8s; } 
+
+.animate-fadeInUp-5 { animation-delay: 1.0s; } /* For the profile photo/visuals */ 
+
+ 
+
+ 
+
+/* Portfolio image slide-up animation */ 
+
+@keyframes slideUp { 
+
+from { 
+
+opacity: 0; 
+
+transform: translateY(20px); 
+
+} 
+
+to { 
+
+opacity: 1; 
+
+transform: translateY(0); 
+
+} 
+
+} 
+
+.animate-slideUp { 
+
+animation: slideUp 0.5s ease-out forwards; 
+
+} 
+
+ 
+
+/* Skill list item styling for hover effect */ 
+
+.skill-item { 
+
+border: 1px solid transparent; 
+
+transition: all 0.2s ease; 
+
+} 
+
+.skill-item:hover { 
+
+border: 1px solid #60a5fa; /* Blue-400 equivalent for 1px border */ 
+
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+
+} 
+
+/* Certificate card styling */ 
+
+.cert-card { 
+
+transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+overflow: hidden; 
+
+border: 1px solid #e5e7eb; /* Gray-200 */ 
+
+} 
+
+.cert-card:hover { 
+
+transform: translateY(-5px); 
+
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+
+border:1px solid #3b82f6; /* Blue border on hover */ 
+
+} 
+
+ 
+
+/* Custom scrollbar for project list to make it look cleaner */ 
+
+#project-list-web::-webkit-scrollbar, 
+
+#project-list-data::-webkit-scrollbar, 
+
+#certificates-scroll-container::-webkit-scrollbar { 
+
+width: 6px; 
+
+} 
+
+#project-list-web::-webkit-scrollbar-thumb, 
+
+#project-list-data::-webkit-scrollbar-thumb, 
+
+#certificates-scroll-container::-webkit-scrollbar-thumb { 
+
+background-color: #cbd5e1; /* Gray-300 */ 
+
+border-radius: 3px; 
+
+} 
+
+#project-list-web::-webkit-scrollbar-track, 
+
+#project-list-data::-webkit-scrollbar-track, 
+
+#certificates-scroll-container::-webkit-scrollbar-track { 
+
+background-color: transparent; 
+
+} 
+
+/* Portfolio specific classes */ 
+
+.portfolio-list { 
+
+max-height: 600px;  
+
+overflow-y: auto;  
+
+padding-right: 0.5rem; 
+
+} 
+
+</style> 
+
+</head> 
+
+<body> 
+
+ 
+
+<!-- Navigation Bar --><header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50"> 
+
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"> 
+
+<h1 class="text-2xl font-bold text-gray-800 tracking-tight"> 
+
+<a href="#home" class="hover:text-blue-600 transition duration-300" data-page="home"> 
+
+Jawid <span class="text-blue-600">AZ</span> 
+
+</a> 
+
+</h1> 
+
+<div class="space-x-4 md:space-x-8"> 
+
+<a href="#home" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="home">Home</a> 
+
+<a href="#about" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="about">About Me</a> 
+
+<!-- SKILLS TAB --> 
+
+<a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="skills">Skills</a> 
+
+<!-- NEW CERTIFICATES TAB --> 
+
+<a href="#certificates" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="certificates">Certificates</a> 
+
+<a href="#portfolio" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="portfolio">Portfolio</a> 
+
+<a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="contact">Contact</a> 
+
+</div> 
+
+</nav> 
+
+</header> 
+
+ 
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 relative overflow-hidden"> 
+
+<!-- Animated Background Blobs --><div class="home-background-blob blob-one"></div> 
+
+<div class="home-background-blob blob-two"></div> 
+
+ 
+
+<!-- Home Section (Updated Dual-Tone View) --> 
+
+<section id="home" class="content-section flex items-center justify-center relative z-10"> 
+
+<div class="py-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 items-center gap-12 text-center md:text-left"> 
+
+ 
+
+<!-- Left Column: Text & CTA --> 
+
+<div class="md:order-1 order-2 space-y-4"> 
+
+<p class="text-xl text-blue-600 font-semibold mb-2 animate-fadeInUp animate-fadeInUp-1">Hello I'm</p> 
+
+<h2 class="text-6xl font-extrabold text-gray-900 leading-tight sm:text-7xl lg:text-8xl animate-fadeInUp animate-fadeInUp-2"> 
+
+Jawid Arabzada
+
+</h2> 
+
+<h3 class="text-3xl font-light text-gray-800 sm:text-4xl animate-fadeInUp animate-fadeInUp-3"> 
+
+<span id="typing-text" class="text-blue-600 font-medium"></span> 
+
+</h3> 
+
+<p class="text-lg text-gray-600 pt-2 animate-fadeInUp animate-fadeInUp-4"> 
+
+Specializing in developing  web applications and data-driven platforms, transforming complex data into insights
+</p> 
+
+<!-- CTAs --> 
+
+<div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4 animate-fadeInUp animate-fadeInUp-5 justify-center md:justify-start"> 
+
+<a href="#portfolio" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105" data-page="portfolio"> 
+
+Explore Projects 
+
+</a> 
+
+<a href="#contact" class="px-8 py-3 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300" data-page="contact"> 
+
+Get In Touch 
+
+</a> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- Right Column: Animated Visual (Photo + Code Snippet) --> 
+
+<div class="md:order-2 order-1 flex justify-center relative pt-12 md:pt-0 animate-fadeInUp animate-fadeInUp-5"> 
+
+<!-- Stylized Code Snippet/Terminal Mockup --> 
+
+<div class="absolute w-80 h-80 bg-gray-900 rounded-xl shadow-2xl rotate-3 transform transition duration-500 ease-in-out hover:rotate-0 hover:scale-105 z-0 p-4 border-2 border-blue-500 hidden sm:block"> 
+
+<div class="flex space-x-1 mb-3"> 
+
+<span class="w-3 h-3 bg-red-500 rounded-full"></span> 
+
+<span class="w-3 h-3 bg-yellow-400 rounded-full"></span> 
+
+<span class="w-3 h-3 bg-green-500 rounded-full"></span> 
+
+</div> 
+
+<pre class="text-green-400 text-xs font-mono"> 
+
+<span class="text-gray-500">// Portfolio Greeting</span> 
+
+<span class="text-yellow-400">const</span> <span class="text-cyan-400">hireStatus</span> = <span class="text-pink-400">true</span>; 
+
+<span class="text-yellow-400">function</span> <span class="text-green-400">checkStatus</span>() { 
+
+<span class="text-yellow-400">if</span> (hireStatus) { 
+
+<span class="text-red-400">return</span> <span class="text-orange-300">"Available for Projects"</span>; 
+
+} 
+
+} 
+
+<span class="text-yellow-400">const</span> <span class="text-cyan-400">status</span> = <span class="text-green-400">checkStatus</span>(); 
+
+<span class="text-gray-500">/* ... looking forward to connecting! */</span> 
+
+</pre> 
+
+</div> 
+
+ 
+
+<!-- Profile Photo (floating over the snippet) --> 
+
+<div class="w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-gray-300 overflow-hidden shadow-2xl profile-photo border-4 border-white z-10 -mt-12 sm:mt-0"> 
+
+<!-- IMPORTANT: Replace the placeholder URL below with the direct URL to your high-resolution profile image. --> 
+
+<img src="./images/profile.jpg" alt="Your Profile Photo" class="w-full h-full object-cover"> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- Social Links (Now integrated below the CTAs for better flow on mobile) --> 
+
+<div class="md:order-3 order-3 md:col-span-2 pt-8 flex space-x-6 justify-center md:justify-start"> 
+
+<a href="https://github.com/Jawid-Arabzada" target="_blank" class="text-gray-500 hover:text-gray-700 transition duration-300"> 
+
+<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"> 
+
+<path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.83 9.504.47.087.686-.233.686-.503 0-.256-.009-.927-.014-1.815-2.782.607-3.369-1.341-3.369-1.341-.454-1.154-1.107-1.464-1.107-1.464-.905-.619.068-.607.068-.607 1.002.072 1.531 1.031 1.531 1.031.892 1.529 2.341 1.087 2.91.829.091-.645.349-1.087.635-1.334-2.22-.252-4.555-1.111-4.555-4.94 0-1.091.39-1.984 1.029-2.682-.103-.252-.446-1.264.098-2.64 0 0 .84-.268 2.75 1.024A9.155 9.155 0 0112 5.03c.854.004 1.706.113 2.502.327 1.909-1.292 2.748-1.024 2.748-1.024.546 1.376.202 2.388.099 2.64.64.698 1.028 1.591 1.028 2.682 0 3.839-2.339 4.686-4.566 4.935.359.307.678.915.678 1.846 0 1.334-.012 2.41-.012 2.731 0 .274.205.594.694.502C21.139 20.2 24 16.445 24 12.017 24 6.484 19.522 2 14 2H12z" clip-rule="evenodd" /> 
+
+</svg> 
+
+</a> 
+
+
+<!-- home page linked in and github -->
+<a href="https://www.linkedin.com/in/jawid-arabzada-090144ba/" target="_blank" class="text-gray-500 hover:text-gray-700 transition duration-300"> 
+
+<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"> 
+
+<path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.72c0-1.16-.48-1.68-1.42-1.68-.85 0-1.18.6-.96 1.18V19h-3v-9h3v1.27a3.49 3.49 0 013.11-1.64c2.23 0 3.89 1.48 3.89 4.6v4.77z" /> 
+
+</svg> 
+
+</a> 
+
+</div> 
+
+</div> 
+
+</section> 
+
+ 
+
+<!-- About Me Section (Redesigned for single column flow) --><section id="about" class="content-section hidden"> 
+
+<h2 class="text-5xl font-bold text-gray-800 mb-10 border-b-4 border-blue-500 pb-2">About Me</h2> 
+
+<div class="space-y-12"> 
+
+<!-- 1. General Description (Full Width) --> 
+
+<div class="space-y-6 text-lg text-gray-700 max-w-4xl"> 
+
+Detail-oriented web developer and Data Analyst with a Bachelor’s in Computer Science and an MBA, combining
+strong analytical skills with technical expertise in HTML, CSS, JS, SQL, Python, and Power BI. Experienced in
+preparing reports, validating data, and delivering insights to support decision-making. Skilled at
+collaborating across teams, maintaining data accuracy, and developing dashboards to track
+performance metrics. Adept at bridging technical knowledge with business acumen to drive
+actionable insights.
+
+</div> 
+
+ 
+
+<!-- 2. Work Experience Section (Full Width) --> 
+
+<div class="pt-8 border-t border-gray-200 max-w-5xl"> 
+
+<h3 class="text-3xl font-semibold text-gray-800 mb-6">Work Experience</h3> 
+
+<!-- Role 1: Web Developer --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Web Developer</h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2022 - Present</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1 font-medium">Freelancer | </p> 
+
+<ul class="list-disc list-inside space-y-1 text-sm text-gray-600 mt-3"> 
+
+<li>Designed, developed, and maintained dynamic websites and software applications, ensuring
+high functionality and alignment with client objectives.</li> 
+
+<li>Analyzed client requirements to identify bugs and implement bug fixes, enhancing usability,
+functionality, and overall user experience</li> 
+
+<li>Delivered responsive web designs using HTML, CSS, JavaScript, Bootstrap, and WordPress,
+improving mobile accessibility and visual consistency</li> 
+
+</ul> 
+
+</div> 
+
+<!-- Role 2: Business Process Analyst --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Business Process Analyst</h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2020 - Now</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1 font-medium">Accenture | Kuala Lumpur Malaysa </p> 
+
+<ul class="list-disc list-inside space-y-1 text-sm text-gray-600 mt-3"> 
+
+<li>Executed core business processes and technical transactions with 99% accuracy, ensuring
+operational efficiency and compliance</li> 
+
+<li>Resolved customer requests and incidents using incident management and escalation
+procedures, improving response time.</li> 
+
+<li>Managed operational risks and enforced security compliance requirements, resulting in zero
+major breaches</li> 
+
+</ul> 
+
+</div> 
+
+<!-- Role 3: Platform Experience Associate --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Platform Experience Associate</h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2019 - 2022</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1 font-medium">IT Business Solution Sdn Bhd | Kuala Lumpur Malaysia</p> 
+
+<ul class="list-disc list-inside space-y-1 text-sm text-gray-600 mt-3"> 
+
+<li>Managed and safeguarded digital platform content, ensuring policy compliance and
+maintaining a 99% accuracy rate in content moderation</li> 
+
+<li>Responded to user inquiries and provided timely resolutions, improving response efficiency
+and enhancing customer satisfaction scores.</li> 
+
+<li>Built and maintained deep knowledge of customer-specific business processes, enabling
+tailored solutions and stronger client relationships</li> 
+
+</ul> 
+
+</div> 
+
+<!-- Role 4: Software Engineer Intern  --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Software Engineer Intern </h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2018 - 2018</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1 font-medium">Favor Tech Sdn Bhd  |  Kuala Lumpur ,
+Malaysia </p> 
+
+<ul class="list-disc list-inside space-y-1 text-sm text-gray-600 mt-3"> 
+
+<li>Conducted manual software testing, including test planning, test execution, and bug
+tracking, ensuring defect-free product delivery.</li> 
+
+<li>racking, ensuring defect-free product delivery.
+Collaborated with senior engineers on UI design and web development projects, improving
+usability and front-end performance</li> 
+
+<li>Tested applications for usability, functionality, and coding standard compliance, reducing
+post-release defects and enhancing user experience</li> 
+
+</ul> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- 3. Education Section (Full Width) --> 
+
+<div class="pt-8 border-t border-gray-200 max-w-5xl"> 
+
+<h3 class="text-3xl font-semibold text-gray-800 mb-6">Education</h3> 
+
+<!-- Education Item 1 (Master of Science) --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Bachelor of Computer Science</h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2015 - 2019</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1">
+International Islamic University Malaysia, Malaysia</p> 
+
+<p class="text-sm text-gray-600 mt-2"></p> 
+
+</div> 
+
+<!-- Education Item 2 (MBA) --> 
+
+<div class="mb-6 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300"> 
+
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center"> 
+
+<h4 class="text-xl font-bold text-blue-600">Master of Business Administration (MBA)</h4> 
+
+<span class="text-sm font-semibold text-gray-500 bg-blue-100 px-3 py-1 rounded-full mt-1 sm:mt-0">2020 - 2021</span> 
+
+</div> 
+
+<p class="text-gray-700 mt-1">University of Wales Trinity Saint David</p> 
+
+<p class="text-sm text-gray-600 mt-2"></p> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</section> 
+
+<!-- NEW SKILLS SECTION --> 
+
+<section id="skills" class="content-section hidden"> 
+
+<h2 class="text-5xl font-bold text-gray-800 mb-10 border-b-4 border-blue-500 pb-2">Technical & Business Expertise</h2> 
+
+<p class="text-lg text-gray-600 mb-12 max-w-4xl">A detailed breakdown of my proficiency across key programming, data analysis, and business management domains, presented in distinct, focusable categories.</p> 
+
+ 
+
+<div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start"> 
+
+<!-- Skills Card 1: Languages --> 
+
+<div id="card-languages" class="bg-white p-6 rounded-xl shadow-xl space-y-4"> 
+
+<h3 class="text-2xl font-bold text-gray-800 mb-4">Code Languages</h3> 
+
+<!-- Skill items injected here --> 
+
+</div> 
+
+ 
+
+<!-- Skills Card 2: Web Development --> 
+
+<div id="card-web-dev" class="bg-white p-6 rounded-xl shadow-xl space-y-4"> 
+
+<h3 class="text-2xl font-bold text-gray-800 mb-4">Web Development</h3> 
+
+<!-- Skill items injected here --> 
+
+</div> 
+
+ 
+
+<!-- Skills Card 3: Data & Analysis --> 
+
+<div id="card-data-analysis" class="bg-white p-6 rounded-xl shadow-xl space-y-4"> 
+
+<h3 class="text-2xl font-bold text-gray-800 mb-4">Data & Analytics</h3> 
+
+<!-- Skill items injected here --> 
+
+</div> 
+
+<!-- Skills Card 4: Tools & DevOps --> 
+
+<div id="card-tools" class="bg-white p-6 rounded-xl shadow-xl space-y-4"> 
+
+<h3 class="text-2xl font-bold text-gray-800 mb-4">Tools & Platforms</h3> 
+
+<!-- Skill items injected here --> 
+
+</div> 
+
+ 
+
+<!-- Skills Card 5: Business & Management --> 
+
+<div id="card-business" class="bg-white p-6 rounded-xl shadow-xl space-y-4"> 
+
+<h3 class="text-2xl font-bold text-gray-800 mb-4">Business Acumen</h3> 
+
+<!-- Skill items injected here --> 
+
+</div> 
+
+ 
+
+</div> 
+
+</section> 
+
+<!-- NEW CERTIFICATES SECTION (UPDATED) --> 
+
+<section id="certificates" class="content-section hidden"> 
+
+<h2 class="text-5xl font-bold text-gray-800 mb-10 border-b-4 border-blue-500 pb-2">Certifications & Training</h2> 
+
+<p class="text-lg text-gray-600 mb-12 max-w-4xl">Documented proof of specialized knowledge and formal training completed in relevant technical and business domains.</p> 
+
+ 
+
+<!-- Scrollable container for certificates --> 
+
+<div id="certificates-scroll-container" class="max-h-[80vh] overflow-y-auto"> 
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pr-2"> 
+
+<!-- Certificate 1: AWS --> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<!-- Increased image height to 400 --> 
+
+<img src="images/sql.jpeg" alt="Analyze data with sql" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/a78bfa/ffffff?text=AWS+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">Analyze data with SQL</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Accenture Percepio</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: January 2025</p> 
+
+</div> 
+
+</div> 
+
+<!-- Certificate 2: Scrum --> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<!-- Increased image height to 400 --> 
+
+<img src="images/panda.jpeg" alt="Certified ScrumMaster Certificate" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/10b981/ffffff?text=Scrum+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">Analyzing Data in Pandas</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Accenture Percepio</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: Dec 2024</p> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- Certificate 3: Python/Data Science --> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<!-- Increased image height to 400 --> 
+
+<img src="images/git.png" alt="Professional Data Science Certification" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/f59e0b/ffffff?text=Data+Science+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">How Git Works</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Pluralsight</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: March 2023</p> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- Certificate 4: Web Security --> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<!-- Increased image height to 400 --> 
+
+<img src="images/forage.png" alt="Web Application Security Specialist Certificate" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/ef4444/ffffff?text=Security+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">Developer Simulation</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Forage</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: Sep 2023</p> 
+
+</div> 
+
+</div> 
+
+<!-- Added extra mock certificates to demonstrate scrolling --> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<img src="images/agile.png" alt="Google Analytics Certification" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/34d399/ffffff?text=GA+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">Agile Principles</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Accenture Percepio</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: January 2022</p> 
+
+</div> 
+
+</div> 
+
+<div class="cert-card bg-white rounded-xl shadow-lg hover:shadow-xl cursor-pointer"> 
+
+<img src="images/dg1.png" alt="Microsoft Azure Fundamentals Certificate" class="w-full h-auto object-cover rounded-t-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/fbb301/ffffff?text=Azure+Cert+Image'"> 
+
+<div class="p-6"> 
+
+<h3 class="text-2xl font-bold text-gray-800">Digital skills: social media</h3> 
+
+<p class="text-blue-600 font-medium mt-1">Accenture</p> 
+
+<p class="text-sm text-gray-500 mt-2">Issued: July 2020</p> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</section> 
+
+ 
+
+ 
+
+<!-- Portfolio Section (The Interactive Hub) --><section id="portfolio" class="content-section hidden"> 
+
+<h2 class="text-5xl font-bold text-gray-800 mb-10 border-b-4 border-blue-500 pb-2">My Work</h2> 
+
+ 
+
+<!-- NEW: Portfolio Category Tabs --> 
+
+<div class="flex justify-center border-b mb-8" id="portfolio-tabs"> 
+
+<button class="portfolio-tab px-6 py-3 text-lg font-semibold border-b-4 border-blue-600 text-blue-600 active-portfolio-tab transition duration-300" data-category="web"> 
+
+Websites & Applications 
+
+</button> 
+
+<button class="portfolio-tab px-6 py-3 text-lg font-semibold border-b-4 border-transparent text-gray-500 hover:text-blue-600 transition duration-300" data-category="data"> 
+
+Data & Analysis Projects 
+
+</button> 
+
+</div> 
+
+ 
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8"> 
+
+<!-- Project List (Left Side - Fixed Height and Scrollable) --> 
+
+<div class="md:col-span-1"> 
+
+<div id="project-list-container" class="portfolio-list space-y-4"> 
+
+<!-- Content loaded by JS based on current category --> 
+
+</div> 
+
+</div> 
+
+ 
+
+<!-- Project Detail Viewer (Right Side - Content and Animation) --> 
+
+<div class="md:col-span-3 bg-white p-8 rounded-xl shadow-2xl"> 
+
+<div id="project-details" class="transition-opacity duration-500 opacity-0"> 
+
+<!-- Content updated by JavaScript --> 
+
+</div> 
+
+ 
+
+<!-- Carousel/Dot Navigation for Project Images (Animation) --> 
+
+<div class="flex justify-center space-x-2 mt-6" id="image-dots"> 
+
+<!-- Dots populated by JavaScript --> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</section> 
+
+ 
+
+<!-- Contact Section --><section id="contact" class="content-section hidden flex items-center justify-center"> 
+
+<div class="w-full max-w-lg bg-white p-8 rounded-xl shadow-2xl"> 
+
+<h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">Get In Touch</h2> 
+
+<p class="text-gray-600 mb-8 text-center">I'm currently available for freelance work and new opportunities. Let's connect!</p> 
+
+<form id="contact-form" class="space-y-6"> 
+
+<div> 
+
+<label for="name" class="block text-sm font-medium text-gray-700">Name</label> 
+
+<input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"> 
+
+</div> 
+
+<div> 
+
+<label for="email" class="block text-sm font-medium text-gray-700">Email</label> 
+
+<input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"> 
+
+</div> 
+
+<div> 
+
+<label for="message" class="block text-sm font-medium text-gray-700">Message</label> 
+
+<textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:focus:border-blue-500"></textarea> 
+
+</div> 
+
+<button type="submit" class="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"> 
+
+Send Message 
+
+</button> 
+
+<p id="contact-message" class="text-center text-sm mt-4 hidden"></p> 
+
+</form> 
+
+ 
+
+<div class="mt-8 text-center space-y-4"> 
+
+<p class="text-gray-700">Or reach me directly:</p> 
+
+<div class="flex justify-center space-x-6"> 
+
+<a href="mailto:your.email@example.com" class="text-blue-600 hover:text-blue-800 transition duration-300">Email</a> 
+
+<a href="https://www.linkedin.com/in/jawid-arabzada-090144ba/" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300">LinkedIn</a> 
+
+<a href="https://github.com/Jawid-Arabzada" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300">GitHub</a> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</section> 
+
+ 
+
+</main> 
+
+ 
+
+<footer class="mt-20 py-8 text-center text-gray-500 text-sm border-t border-gray-200"> 
+
+&copy; 2025 Jawid Arabzada Portfolio. 
+
+<!--&copy; 2025 [Your Name] Portfolio. Built with $\text{HTML}$, $\text{Tailwind CSS}$, and $\text{JavaScript}$. 
+-->
+</footer> 
+
+ 
+
+<script> 
+
+document.addEventListener('DOMContentLoaded', () => { 
+
+// --- Configuration Data --- 
+
+const developerTitle = "Building Scalable Web Applications and Dashboards.";  
+
+ 
+
+// Data for the interactive portfolio 
+
+const projectsData = { 
+
+web: [ 
+
+{ 
+
+id: 'project1', 
+
+title: 'Armaghan Website', 
+
+tech: 'Wordpress', 
+
+description: 'A professional, responsive website designed for an ICT service provider, featuring modern UI.', 
+
+features: ['Modern & Professional Design', 'RTL & Persian Language Support', 'Responsive Layout', 'Fast Loading & SEO-Ready'], 
+
+link: 'https://armaghanlight.jawidprofile.com/', 
+
+images: [ 
+
+{ url: 'images/armaghan.jpg', alt: 'Home page screenshot' }
+
+// { url: 'https://placehold.co/800x450/1e3a8a/ffffff?text=Product+Details+Page', alt: 'Product detail screenshot' }, 
+
+// { url: 'https://placehold.co/800x450/93c5fd/000000?text=Checkout+Flow', alt: 'Checkout screenshot' }, 
+
+] 
+
+}, 
+
+{ 
+
+id: 'project2', 
+
+title: 'Badakhshan Bazaar E-Commerce', 
+
+tech: 'Wordpress,HTML,CSS,JS', 
+
+description: ' Badakhshan Bazaar is a digital marketplace offering authentic Badakhshan products, bringing traditional craftsmanship and regional heritage to global customers..', 
+
+features: ['Authentic Product Marketplace', 'User-Friendly E-commerce Experience', ' Secure Online Payments', 'SEO-Optimized Structure'], 
+
+link: 'https://badakhshanebazaar.com/', 
+
+images: [ 
+
+{ url: 'images/bdk1.png', alt: 'Dashboard main view' }, 
+
+{ url: 'images/bdk2.png', alt: 'Chart view' }, 
+
+{ url: 'images/bdk3.png', alt: 'Settings page' }, 
+
+] 
+
+}, 
+
+{ 
+
+id: 'project3', 
+
+title: 'Lenity Care Australia', 
+
+tech: 'HTML CSS and JavaScript', 
+
+description: 'Lenity Care is an Australian NDIS-registered disability support provider offering personalized, client-centered services.', 
+
+features: ['Clean UI design', 'Responsive layout', 'Clear navigation structure', 'Contact & enquiry integration'], 
+
+link: 'https://lenity.com.au/', 
+
+images: [ 
+
+{ url: 'images/lc1.png', alt: 'Chat rooms view' }, 
+
+{ url: 'images/lc2.png', alt: 'Mobile chat view' }
+
+] 
+
+}, 
+
+{ 
+
+id: 'project4', 
+
+title: 'Favor Tech Website', 
+
+tech: 'HTML , CSS ,JavaScript ,PHP, MySql', 
+
+description: 'Favortech is a technology solutions website showcasing digital platforms and products designed to help businesses streamline operations, enhance customer engagement', 
+
+features: ['Digital solutions showcase', 'Product-focused navigation', 'Mobile app integration', 'Customer engagement tools'], 
+
+link: 'https://www.favortech.net/', 
+
+images: [ 
+
+{ url: 'images/ft1.png', alt: 'Mobile App Screen 1' }, 
+
+{ url: 'images/ft2.png', alt: 'Mobile App Screen 2' }, 
+
+] 
+
+}, 
+
+{ 
+
+id: 'project5', 
+
+title: 'Star Store', 
+
+tech: 'HTML , CSS ,JavaScript, Java, JDBC, Servlets, JSP, MySql', 
+
+description: 'STAR STORE is an e-commerce website. It is a fully functioned online store where user can buy the items and pay online..', 
+
+features: ['User-friendly product catalog', 'Secure checkout and payment integration', 'Responsive and mobile-friendly design', 'Shopping cart and order management'], 
+
+link: '#', 
+
+images: [ 
+
+{ url: 'images/st2.png', alt: 'API Documentation Mock' }, 
+
+{ url: 'images/st1.png', alt: 'API Dashboard' }, 
+
+] 
+
+}, 
+
+{ 
+
+id: 'project6', 
+
+title: 'PamirTech Website', 
+
+tech: 'HTML , CSS ,JavaScript ,PHP, MySql', 
+
+description: 'Pamir Tech Website was developed for one of the clients. The website provides Education service such as online classes and it has a library which the users can download the books.', 
+
+features: ['Clear navigation', 'User Freindly', 'Interactive Pages', 'Responsive Design'], 
+
+link: 'www.pamirtech.com', 
+
+images: [ 
+
+{ url: 'images/pt1.jpg', alt: 'Home Page V2' }, 
+
+// { url: 'https://placehold.co/800x450/15803d/ffffff?text=About+Me+V2', alt: 'About Me V2' }, 
+
+] 
+
+},
+
+{ 
+
+id: 'project7', 
+
+title: 'EzyGift', 
+
+tech: 'Android Studio , Java, SqlLite, API’s', 
+
+description: 'EzyGift was the final year project of my University which was developed by me and my teammate. The application will recommend gift based on the user specifications provided.', 
+
+features: ['Personalized gift recommendations by event', 'relationship age, and budget', 'Smart filters and price-based suggestions', 'Event reminders with curated gift ideas'], 
+
+link: '#', 
+
+images: [ 
+
+{ url: 'images/ez1.png', alt: 'Home Page V2' }, 
+
+{ url: 'images/ez2.jpeg', alt: 'About Me V2' }, 
+
+] 
+
+} 
+
+], 
+
+data: [ 
+
+{ 
+
+id: 'data1', 
+
+title: 'Automotive Sales Dashboard', 
+
+tech: 'PowerBI, Excel, Dax', 
+
+description: 'This Power BI dashboard analyzes automotive sales performance across the UK and Australia, focusing on revenue trends, order distribution, product performance, and customer insights.', 
+
+features: ["Interactive Power BI dashboard","UK & Australia sales comparison","Product line performance analysis","Dynamic filters and slicers"], 
+
+link: '#', 
+
+images: [ 
+
+{ url: 'images/Dashboard.png', alt: 'Churn Model Prediction Results' }, 
+
+{ url: 'images/pld.png', alt: 'Feature Importance Chart' }, 
+
+] 
+
+}, 
+
+{ 
+
+id: 'data2', 
+
+title: 'E-commerce Sales Dashboard', 
+
+tech: 'SQL, Tableau/Power BI Mock, Excel', 
+
+description: 'Analyzed $1$ million rows of sales data to identify key trends, seasonal variances, and geographic performance drivers. Delivered interactive dashboard to management.', 
+
+features: ['Data Cleaning ETL', 'KPI Definition', 'Interactive Dashboard Mock', 'Executive Summary Report'], 
+
+link: '#', 
+
+images: [ 
+
+{ url: 'https://placehold.co/800x450/4ade80/000000?text=Sales+Dashboard+Mock', alt: 'Sales Dashboard Visualization' }, 
+
+{ url: 'https://placehold.co/800x450/16a34a/ffffff?text=Data+Query+Screenshot', alt: 'SQL Data Query Screenshot' }, 
+
+] 
+
+}, 
+
+
+
+
+] 
+
+}; 
+
+// UPDATED & RE-CATEGORIZED SKILLS DATA for new 5-card layout 
+
+const skillsData = { 
+
+languages: [ 
+
+{ name: 'JavaScript ', level: 70 }, 
+
+{ name: 'Python', level: 80 }, 
+
+{ name: 'HTML/CSS', level: 95 }, 
+
+{ name: 'PHP', level: 70 }, 
+
+], 
+
+webDev: [ 
+
+{ name: 'HTML/CSS', level: 85 }, 
+
+{ name: 'Wordpress', level: 80 }, 
+
+{ name: 'Bootstrap', level: 90 }, 
+
+{ name: 'APIs', level: 90 }, 
+
+], 
+
+dataAnalytics: [ 
+
+{ name: 'Pandas/NumPy', level: 80 }, 
+
+{ name: 'SQL/PostgreSQL', level: 75 }, 
+
+{ name: 'Data Visualization (Excel)', level: 80 }, 
+
+{ name: 'PowerBI', level: 75 }, 
+
+], 
+
+tools: [ 
+
+{ name: 'Git & GitHub', level: 85 }, 
+
+{ name: 'Jira', level: 65 }, 
+
+{ name: 'Databases (MongoDB/SQL)', level: 75 }, 
+
+{ name: 'Jupyter notebook', level: 70 }, 
+
+], 
+
+business: [ 
+
+{ name: 'Project Management ', level: 90 }, 
+
+{ name: 'Financial Analysis', level: 85 }, 
+
+{ name: 'Market Strategy', level: 75 }, 
+
+{ name: 'Leadership & Team Building', level: 95 }, 
+
+] 
+
+}; 
+
+let currentSkillCategory = 'languages'; // Default category for skills page 
+
+ 
+
+let currentPortfolioCategory = 'web'; // Default to Web projects 
+
+ 
+
+// --- Utility Functions --- 
+
+ 
+
+// Function to handle showing/hiding sections based on URL hash 
+
+const navigateTo = (hash) => { 
+
+const targetId = hash.replace('#', '') || 'home'; 
+
+const sections = document.querySelectorAll('.content-section'); 
+
+const navLinks = document.querySelectorAll('.nav-link'); 
+
+ 
+
+sections.forEach(section => { 
+
+section.classList.add('hidden'); 
+
+section.classList.remove('flex'); 
+
+}); 
+
+ 
+
+const targetSection = document.getElementById(targetId); 
+
+if (targetSection) { 
+
+targetSection.classList.remove('hidden'); 
+
+// Add 'flex' only if we are centering content (like home/contact) 
+
+if (targetId === 'home' || targetId === 'contact') { 
+
+targetSection.classList.add('flex'); 
+
+} 
+
+window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top 
+
+ 
+
+// Update active nav link style 
+
+navLinks.forEach(link => { 
+
+link.classList.remove('text-blue-600', 'font-bold'); 
+
+link.classList.add('text-gray-600', 'font-medium'); 
+
+}); 
+
+const activeLink = document.querySelector(`.nav-link[data-page="${targetId}"]`); 
+
+if (activeLink) { 
+
+activeLink.classList.add('text-blue-600', 'font-bold'); 
+
+activeLink.classList.remove('text-gray-600', 'font-medium'); 
+
+} 
+
+ 
+
+// Special function calls for specific pages 
+
+if (targetId === 'portfolio') { 
+
+loadPortfolio(currentPortfolioCategory); 
+
+} 
+
+if (targetId === 'skills') { 
+
+loadAllSkills(); // Load all skill cards on page entry 
+
+} 
+
+// Re-start typing effect if navigating back to home 
+
+if (targetId === 'home') { 
+
+resetTypingEffect(); 
+
+} 
+
+} 
+
+}; 
+
+ 
+
+// --- Home Page Typing Effect (unchanged) --- 
+
+const typingTextElement = document.getElementById('typing-text'); 
+
+let charIndex = 0; 
+
+let isDeleting = false; 
+
+let typingTimeout; 
+
+ 
+
+function resetTypingEffect() { 
+
+clearTimeout(typingTimeout); 
+
+typingTextElement.textContent = ''; 
+
+charIndex = 0; 
+
+isDeleting = false; 
+
+typeWriter(); 
+
+} 
+
+ 
+
+function typeWriter() { 
+
+const fullText = developerTitle; 
+
+ 
+
+if (!isDeleting && charIndex < fullText.length) { 
+
+typingTextElement.textContent += fullText.charAt(charIndex); 
+
+charIndex++; 
+
+} else if (isDeleting && charIndex > 0) { 
+
+typingTextElement.textContent = fullText.substring(0, charIndex - 1); 
+
+charIndex--; 
+
+} 
+
+ 
+
+// If finished typing, wait and then start deleting 
+//jawid note you may uncomment later
+
+// if (!isDeleting && charIndex === fullText.length) { 
+
+// typingTimeout = setTimeout(() => { isDeleting = true; typeWriter(); }, 3000); 
+
+// return; 
+
+// } 
+
+// If finished deleting, wait and then start typing again 
+
+else if (isDeleting && charIndex === 0) { 
+
+typingTimeout = setTimeout(() => { isDeleting = false; typeWriter(); }, 1000); 
+
+return; 
+
+} 
+
+ 
+
+const speed = isDeleting ? 100 : 200; 
+
+typingTimeout = setTimeout(typeWriter, speed); 
+
+} 
+
+// --- Skills Section Interactivity (Updated for Cards) --- 
+
+ 
+
+const renderSkillBars = (containerId, skillArray) => { 
+
+const container = document.getElementById(containerId); 
+
+if (!container) return; 
+
+ 
+
+// Generate HTML for skill bars (REMOVED PROGRESS BARS, ADDED HOVER EFFECT) 
+
+const skillsHtml = skillArray.map(skill => ` 
+
+<div class="skill-item flex items-center p-3 rounded-lg bg-gray-50 transition duration-300 hover:bg-blue-50 cursor-pointer"> 
+
+<!-- Icon Placeholder: Using a simple chevron to represent a skill item --> 
+
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-3 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"> 
+
+<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /> 
+
+</svg> 
+
+<span class="text-base font-medium text-gray-700">${skill.name}</span> 
+
+</div> 
+
+`).join(''); 
+
+container.innerHTML += skillsHtml; // Append content after title 
+
+}; 
+
+const loadAllSkills = () => { 
+
+// Clear and render each category card individually 
+
+document.getElementById('card-languages').innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Code Languages</h3>'; 
+
+renderSkillBars('card-languages', skillsData.languages); 
+
+ 
+
+document.getElementById('card-web-dev').innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Web Development</h3>'; 
+
+renderSkillBars('card-web-dev', skillsData.webDev); 
+
+ 
+
+document.getElementById('card-data-analysis').innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Data & Analytics</h3>'; 
+
+renderSkillBars('card-data-analysis', skillsData.dataAnalytics); 
+
+ 
+
+document.getElementById('card-tools').innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Tools & Platforms</h3>'; 
+
+renderSkillBars('card-tools', skillsData.tools); 
+
+ 
+
+document.getElementById('card-business').innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Business Acumen</h3>'; 
+
+renderSkillBars('card-business', skillsData.business); 
+
+}; 
+
+ 
+
+// --- Portfolio Interactivity (Updated for Categories) --- 
+
+let currentProject = projectsData.web[0]; 
+
+let currentImageIndex = 0; 
+
+let imageInterval; 
+
+ 
+
+const projectDetailsContainer = document.getElementById('project-details'); 
+
+const imageDotsContainer = document.getElementById('image-dots'); 
+
+const projectListContainer = document.getElementById('project-list-container'); 
+
+const portfolioTabs = document.querySelectorAll('.portfolio-tab'); 
+
+ 
+
+const updateProjectImage = () => { 
+
+const showcase = projectDetailsContainer.querySelector('#project-image-showcase'); 
+
+if (!showcase) return; 
+
+ 
+
+const newImage = currentProject.images[currentImageIndex]; 
+
+ 
+
+showcase.innerHTML = ` 
+
+<img src="${newImage.url}" alt="${newImage.alt}" 
+
+class="w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-700 animate-slideUp" 
+
+onerror="this.onerror=null; this.src='https://placehold.co/800x450/60a5fa/ffffff?text=Image+Not+Found'"> 
+
+`; 
+
+ 
+
+// Update dots 
+
+imageDotsContainer.innerHTML = currentProject.images.map((img, index) => ` 
+
+<span class="dot w-3 h-3 rounded-full ${index === currentImageIndex ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'} active-dot" 
+
+data-index="${index}" onclick="changeImage(${index})"></span> 
+
+`).join(''); 
+
+}; 
+
+ 
+
+const cycleProjectImage = () => { 
+
+currentImageIndex = (currentImageIndex + 1) % currentProject.images.length; 
+
+updateProjectImage(); 
+
+}; 
+
+ 
+
+// Expose function globally for dot clicks 
+
+window.changeImage = (index) => { 
+
+clearInterval(imageInterval); 
+
+currentImageIndex = index; 
+
+updateProjectImage(); 
+
+imageInterval = setInterval(cycleProjectImage, 4000); // Restart interval 
+
+}; 
+
+ 
+
+const renderProjectDetails = (project) => { 
+
+currentProject = project; 
+
+currentImageIndex = 0; 
+
+ 
+
+// Stop any existing interval before starting a new one 
+
+clearInterval(imageInterval); 
+
+ 
+
+// Fade out to apply new content 
+
+projectDetailsContainer.classList.add('opacity-0'); 
+
+ 
+
+setTimeout(() => { 
+
+// Update main details 
+
+const featuresHtml = project.features.map(f => `<li class="text-gray-700 flex items-start"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>${f}</li>`).join(''); 
+
+ 
+
+projectDetailsContainer.innerHTML = ` 
+
+<h3 class="4xl font-bold text-gray-800 mb-2">${project.title}</h3> 
+
+<p class="text-blue-600 mb-6 text-xl">${project.tech}</p> 
+
+ 
+
+<div id="project-image-showcase" class="relative w-full h-[450px] bg-gray-100 rounded-lg shadow-inner overflow-hidden mb-6"> 
+
+<!-- Image will be inserted here --></div> 
+
+ 
+
+<p class="text-lg text-gray-700 mb-6">${project.description}</p> 
+
+ 
+
+<h4 class="text-2xl font-semibold text-gray-800 mb-4">Key Features</h4> 
+
+<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0">${featuresHtml}</ul> 
+
+ 
+
+<div class="mt-8"> 
+
+<a href="${project.link}" target="_blank" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"> 
+
+View Live Project (Demo) 
+
+</a> 
+
+</div> 
+
+`; 
+
+ 
+
+// Start image cycling animation 
+
+updateProjectImage(); 
+
+imageInterval = setInterval(cycleProjectImage, 4000); // Change image every 4 seconds 
+
+ 
+
+// Update active card style 
+
+projectListContainer.querySelectorAll('.project-card').forEach(card => card.classList.remove('active')); 
+
+const activeCard = projectListContainer.querySelector(`.project-card[data-project="${project.id}"]`); 
+
+if (activeCard) { 
+
+activeCard.classList.add('active'); 
+
+} 
+
+ 
+
+ 
+
+// Fade back in 
+
+projectDetailsContainer.classList.remove('opacity-0'); 
+
+ 
+
+}, 500); // Delay matches the CSS transition time 
+
+}; 
+
+ 
+
+const loadPortfolio = (category) => { 
+
+currentPortfolioCategory = category; 
+
+const activeProjects = projectsData[category]; 
+
+// Update active tab style 
+
+portfolioTabs.forEach(tab => { 
+
+tab.classList.remove('border-blue-600', 'text-blue-600', 'active-portfolio-tab'); 
+
+tab.classList.add('border-transparent', 'text-gray-500'); 
+
+if (tab.getAttribute('data-category') === category) { 
+
+tab.classList.add('border-blue-600', 'text-blue-600', 'active-portfolio-tab'); 
+
+tab.classList.remove('border-transparent', 'text-gray-500'); 
+
+} 
+
+}); 
+
+ 
+
+// Generate HTML for project list 
+
+if (activeProjects.length === 0) { 
+
+projectListContainer.innerHTML = '<p class="text-gray-500 p-4">No projects in this category yet.</p>'; 
+
+projectDetailsContainer.innerHTML = '<p class="text-gray-500 p-4 text-center">Select a project to view details.</p>'; 
+
+clearInterval(imageInterval); 
+
+imageDotsContainer.innerHTML = ''; 
+
+return; 
+
+} 
+
+ 
+
+const projectListHtml = activeProjects.map(p => ` 
+
+<div class="project-card p-4 bg-white shadow-md hover:shadow-xl rounded-xl" data-project="${p.id}" data-category="${category}"> 
+
+<h3 class="text-xl font-semibold text-gray-800">${p.title}</h3> 
+
+<p class="text-sm text-gray-500">${p.tech.split(',')[0]}</p> 
+
+</div> 
+
+`).join(''); 
+
+projectListContainer.innerHTML = projectListHtml; 
+
+ 
+
+// Add event listeners to the new project cards 
+
+projectListContainer.querySelectorAll('.project-card').forEach(card => { 
+
+card.addEventListener('click', (e) => { 
+
+const projectId = e.currentTarget.getAttribute('data-project'); 
+
+const projectCategory = e.currentTarget.getAttribute('data-category'); 
+
+const selectedProject = projectsData[projectCategory].find(p => p.id === projectId); 
+
+if (selectedProject) { 
+
+renderProjectDetails(selectedProject); 
+
+} 
+
+}); 
+
+}); 
+
+ 
+
+// Load the first project details on initial load or category switch 
+
+renderProjectDetails(activeProjects[0]); 
+
+}; 
+
+ 
+
+// Add event listeners for portfolio category tabs 
+
+portfolioTabs.forEach(tab => { 
+
+tab.addEventListener('click', (e) => { 
+
+const category = e.target.getAttribute('data-category'); 
+
+loadPortfolio(category); 
+
+}); 
+
+}); 
+
+ 
+
+ 
+
+// --- Event Listeners and Initial Load --- 
+
+ 
+
+// Handle navigation clicks and hash changes 
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => { 
+
+anchor.addEventListener('click', function (e) { 
+
+e.preventDefault(); 
+
+history.pushState(null, null, this.getAttribute('href')); 
+
+navigateTo(this.getAttribute('href')); 
+
+}); 
+
+}); 
+
+ 
+
+window.addEventListener('popstate', () => { 
+
+navigateTo(window.location.hash); 
+
+}); 
+
+ 
+
+// Initial load based on URL hash or default to home 
+
+navigateTo(window.location.hash); 
+
+ 
+
+// Start typing animation only if on the home page 
+
+if (!window.location.hash || window.location.hash === '#home') { 
+
+typeWriter(); 
+
+} 
+
+ 
+
+// Contact form submission 
+
+document.getElementById('contact-form').addEventListener('submit', function(e) { 
+
+e.preventDefault(); 
+
+const form = e.target; 
+
+const messageBox = document.getElementById('contact-message'); 
+
+ 
+
+// Simulate sending the email/form data 
+
+setTimeout(() => { 
+
+messageBox.textContent = "Thank thank you for your message! I will get back to you within 24 hours."; 
+
+messageBox.classList.remove('hidden', 'text-red-500'); 
+
+messageBox.classList.add('text-green-600'); 
+
+form.reset(); 
+
+}, 1000); 
+
+}); 
+
+}); 
+
+</script> 
+
+</body> 
+
+</html> 
+
+ 
