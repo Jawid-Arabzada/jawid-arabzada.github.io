@@ -341,7 +341,8 @@ padding-right: 0.5rem;
     /* Ensure project images fit within screen */ 
     #project-image-showcase img { 
         max-height: 300px; 
-        object-contain: center; 
+        width: 100%;
+        object-fit: contain; 
     } 
 }
 </style> 
@@ -354,39 +355,30 @@ padding-right: 0.5rem;
 
 <!-- Navigation Bar --><header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50"> 
 
-<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"> 
+<nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+  <h1 class="text-2xl font-bold">
+    <a href="#home">Jawid <span class="text-blue-600">AZ</span></a>
+  </h1>
 
-<h1 class="text-2xl font-bold text-gray-800 tracking-tight"> 
+  <!-- Hamburger (mobile only) -->
+  <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+    ☰
+  </button>
 
-<a href="#home" class="hover:text-blue-600 transition duration-300" data-page="home"> 
+  <!-- Menu -->
+  <div id="menu"
+       class="hidden md:flex flex-col md:flex-row md:space-x-8
+              absolute md:static top-full left-0 w-full md:w-auto
+              bg-white md:bg-transparent shadow-md md:shadow-none p-4 md:p-0">
+    <a href="#home" class="nav-link block py-2">Home</a>
+    <a href="#about" class="nav-link block py-2">About Me</a>
+    <a href="#skills" class="nav-link block py-2">Skills</a>
+    <a href="#certificates" class="nav-link block py-2">Certificates</a>
+    <a href="#portfolio" class="nav-link block py-2">Portfolio</a>
+    <a href="#contact" class="nav-link block py-2">Contact</a>
+  </div>
+</nav>
 
-Jawid <span class="text-blue-600">AZ</span> 
-
-</a> 
-
-</h1> 
-
-<div class="space-x-4 md:space-x-8"> 
-
-<a href="#home" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="home">Home</a> 
-
-<a href="#about" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="about">About Me</a> 
-
-<!-- SKILLS TAB --> 
-
-<a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="skills">Skills</a> 
-
-<!-- NEW CERTIFICATES TAB --> 
-
-<a href="#certificates" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="certificates">Certificates</a> 
-
-<a href="#portfolio" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="portfolio">Portfolio</a> 
-
-<a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition duration-300" data-page="contact">Contact</a> 
-
-</div> 
-
-</nav> 
 
 </header> 
 
@@ -2051,6 +2043,19 @@ form.reset();
 
 }); 
 
+
+document.getElementById('menu-btn').onclick = () =>
+document.getElementById('menu').classList.toggle('hidden');
+
+ const menu = document.getElementById('menu');
+  const btn = document.getElementById('menu-btn');
+
+  btn.onclick = () => menu.classList.toggle('hidden');
+
+  // ✅ CLOSE menu on link click (mobile)
+  document.querySelectorAll('#menu a').forEach(link => {
+    link.onclick = () => menu.classList.add('hidden');
+  });
 </script> 
 
 </body> 
