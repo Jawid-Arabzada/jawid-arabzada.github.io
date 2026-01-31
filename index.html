@@ -322,6 +322,28 @@ padding-right: 0.5rem;
 
 } 
 
+
+/* Mobile specific visual tweaks */ 
+@media (max-width: 768px) { 
+    .portfolio-list { 
+        max-height: 250px; 
+        display: flex; 
+        flex-direction: row; 
+        overflow-x: auto; 
+        overflow-y: hidden; 
+        gap: 1rem; 
+        padding-bottom: 1rem; 
+    } 
+    .project-card { 
+        min-width: 200px; 
+        flex-shrink: 0; 
+    } 
+    /* Ensure project images fit within screen */ 
+    #project-image-showcase img { 
+        max-height: 300px; 
+        object-contain: center; 
+    } 
+}
 </style> 
 
 </head> 
