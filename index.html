@@ -1832,10 +1832,17 @@ const renderProjectDetails = (project, skipScroll = false) => {
        `; 
       
         
-       // Auto-scroll for mobile users 
+       // Auto-scroll for mobile users :: changed 26/04/2026 
+       //if (!skipScroll && window.innerWidth < 768) { 
+           //document.getElementById('detail-anchor').scrollIntoView({ behavior: 'smooth' }); 
+       //} 
        if (!skipScroll && window.innerWidth < 768) { 
-           document.getElementById('detail-anchor').scrollIntoView({ behavior: 'smooth' }); 
-       } 
+    const anchor = document.getElementById('detail-anchor');
+    
+    if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth' });
+    }
+}
  
        detailsContainer.classList.remove('opacity-0'); 
    }, 400); 
